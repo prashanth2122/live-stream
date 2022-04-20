@@ -1,44 +1,4 @@
-<!-- <div class="login-wrapper">
-    <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" class="login">
-       
-        <label class="title">
-            <h3 class="welcome">Welcome to</h3>
-            Company Product Name
-            <h5 class="hint">Use your Company ID to sign in or create one now</h5>
-        </label>
-       
-        <div class="login-group">
-            
-            <input required class="username" 
-              name="userId" 
-              [(ngModel)]="user.userid" 
-              type="text" 
-              id="login_username" 
-              placeholder="User ID">
-            
-            <input required class="password" 
-              name="password" 
-              [(ngModel)]="user.password" 
-              type="password" 
-              id="login_password" 
-              placeholder="Password">
-            
-            <button type="submit" 
-              class="btn btn-primary"
-              [disabled]="loginForm.form.invalid">
-                Login
-            </button>
-            <button mat-raised-button color="primary">Primary</button>
-           
-            <a routerLink="register" 
-              class="signup">
-                Sign up for an Account
-            </a>
-          </div>
-
-    </form>
-</div> -->
-<mat-card>
+<mat-card class="login-container">
   <mat-card-title>Login</mat-card-title>
 <mat-card-content>
 <form [formGroup]="form" (ngSubmit)="submit()">
