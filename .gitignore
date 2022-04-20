@@ -48,3 +48,4 @@ Thumbs.db
 
 #secrets
 cred.ts
+src/cred.ts
