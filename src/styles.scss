@@ -102,3 +102,8 @@ mat-toolbar {
 mat-toolbar[color="primary"] {
   height: var(--default-height);
 }
+
+.mat-toolbar.mat-primary {
+  background: #212529;
+  color: #fff;
+}
