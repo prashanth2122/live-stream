@@ -1,8 +1,7 @@
-import { Input, Component, Output, EventEmitter, OnInit } from '@angular/core';
-import { UserService  } from "../../services/user.service";
+import { Component, OnInit } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { loginUser } from '../accountGraphql'
-import { FormGroup, FormControl,FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AbstractControl,FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -10,36 +9,30 @@ import { FormGroup, FormControl,FormsModule, ReactiveFormsModule } from '@angula
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit{
-  form: FormGroup = new FormGroup({
-    username: new FormControl(''),
-    password: new FormControl(''),
-  });
-  
-  constructor(
-    private user$: UserService,
-    private apollo: Apollo
-    ) { }
-  ngOnInit() {
+  form!: FormGroup;
+  submitted = false;
+  constructor(private formBuilder: FormBuilder,private apollo: Apollo) {}
+
+  ngOnInit(): void {
+    this.form = this.formBuilder.group(
+      {
+        username: ['', Validators.required],
+        password: ['', Validators.required],
+
+      },
+    );
+  }
+  get f(): { [key: string]: AbstractControl } {
+    return this.form.controls;
   }
 
-  // onSubmit(form:any){
-  //   this.apollo.query({query:loginUser,variables:{userId:this.user.userid,password:this.user.password}}).subscribe((data:any)=>{
-  //     if(data.data.users.length > 0){
-  //       console.log("loggedin")
-  //     }
-  //     else{
-  //       console.log("please check your credentials");
-  //     }
-      
-  //   })
+  onSubmit(): void {
+    this.submitted = true;
 
-  //   console.log(this.user)
-  // //  this.user$.loginUser(this.user)
-  // }
-  submit() {
-    if (this.form.valid) {
-      this.submitEM.emit(this.form.value);
-      this.apollo.query({query:loginUser,variables:{userId:this.form.value.userId,password:this.form.value.password}}).subscribe((data:any)=>{
+    if (this.form.invalid) {
+      return;
+    }
+    this.apollo.query({query:loginUser,variables:{userId:this.form.value.username,password:this.form.value.password}}).subscribe((data:any)=>{
       if(data.data.users.length > 0){
         console.log("loggedin")
       }
@@ -48,10 +41,6 @@ export class LoginComponent implements OnInit{
       }
       
     })
-    }
+    console.log(JSON.stringify(this.form.value, null, 2));
   }
-  @Input() error: string | null | undefined;
-
-  @Output() submitEM = new EventEmitter();
-
 }

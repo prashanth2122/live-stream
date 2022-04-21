@@ -1,2 +1,14 @@
-<mat-toolbar color="primary" class="main-header-toolbar black-background"><img src="/assets/movie-svgrepo-com.svg" style="width: 30px;"><p> Live-Steam</p></mat-toolbar>
+<mat-toolbar color="primary" class="main-header-toolbar black-background">
+    <div class="header-logo-left">
+        <img src="/assets/movie-svgrepo-com.svg" style="width: 30px;">
+        <p> <a [routerLink]="['/']"></a> Live-Steam</p>
+    </div>
 
+    <div class="header-right">
+        <ul>
+            <li [routerLink]="['/login']">Login</li>
+            <li>My Profile</li>
+            <li>Logout</li>
+        </ul>
+    </div>
+</mat-toolbar>

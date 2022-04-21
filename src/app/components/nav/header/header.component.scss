@@ -3,3 +3,26 @@
     position: fixed;
 
   }
+  .header-logo-left{
+    display: flex;
+    width: 75%;
+    user-select: none;
+    p{
+      cursor: pointer;
+    }
+    
+  }
+  .header-right{
+    width: 23%;
+    text-align: end;
+    ul{
+      display: flex;
+      float: right;
+      li{
+        cursor: pointer;
+        list-style: none;
+        margin-right: 10px;
+        font-size: 15px;
+      }
+    }
+  }
