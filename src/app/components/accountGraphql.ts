@@ -11,3 +11,11 @@ query MyQuery($userId:String,$password:String) {
     }
   }
 `;
+
+export const signUpUser=gql`
+mutation signup($userObj: users_insert_input!) {
+  insert_users_one(object: $userObj) {
+    id
+  }
+}
+`;

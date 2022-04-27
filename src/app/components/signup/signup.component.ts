@@ -6,6 +6,8 @@ import {
   Validators
 } from '@angular/forms';
 import Validation from '../../utils/validation';
+import { signUpUser } from '../accountGraphql'
+import { Apollo } from 'apollo-angular';
 
 @Component({
   selector: 'app-signup',
@@ -17,13 +19,14 @@ export class SignupComponent implements OnInit {
   form!: FormGroup;
   submitted = false;
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(private formBuilder: FormBuilder,private apollo: Apollo) {}
 
   ngOnInit(): void {
     this.form = this.formBuilder.group(
       {
-        fullname: ['', Validators.required],
-        username: [
+        firstName: ['', Validators.required],
+        lastName: ['', Validators.required],
+        userId: [
           '',
           [
             Validators.required,
@@ -31,6 +34,7 @@ export class SignupComponent implements OnInit {
             Validators.maxLength(20)
           ]
         ],
+        phone: ['', Validators.required],
         email: ['', [Validators.required, Validators.email]],
         password: [
           '',
@@ -59,8 +63,23 @@ export class SignupComponent implements OnInit {
     if (this.form.invalid) {
       return;
     }
-
-    console.log(JSON.stringify(this.form.value, null, 2));
+    console.log(JSON.stringify(this.form.value));
+    let userObj={
+      firstName:this.form.value.firstName,
+      lastName:this.form.value.lastName,
+      userId:this.form.value.userId,
+      phone:this.form.value.phone,
+      email:this.form.value.email,
+      password:this.form.value.password
+    }
+    this.apollo.mutate({mutation:signUpUser,variables:{userObj:userObj}}).subscribe((data:any)=>{
+      if(data.data.insert_users_one){
+        console.log("sucess")
+      }
+      else{
+        console.log("err")
+      }
+    })
   }
 
   onReset(): void {

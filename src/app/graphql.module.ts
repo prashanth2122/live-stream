@@ -15,7 +15,8 @@ import { hKey } from '../cred';
             uri: "https://loving-drake-15.hasura.app/v1/graphql",
               // If needed, you can set custom headers here
               headers: new HttpHeaders({
-                "x-hasura-admin-secret": hKey
+                "x-hasura-admin-secret": hKey,
+                "x-hasura-default-role": "partner",
               })
           }),
           cache: new InMemoryCache()
