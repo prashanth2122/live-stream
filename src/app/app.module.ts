@@ -12,6 +12,7 @@ import { MaterialModule } from './material.module';
 import { SignupComponent } from './components/signup/signup.component';
 import { HeaderComponent } from './components/nav/header/header.component';
 import { FooterComponent } from './components/nav/footer/footer.component';
+import { MoviesComponent } from './components/media/movies/movies.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { FooterComponent } from './components/nav/footer/footer.component';
     LoginComponent,
     SignupComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    MoviesComponent
   ],
   imports: [
     BrowserModule,
